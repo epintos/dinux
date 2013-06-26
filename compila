@@ -1,0 +1,17 @@
+cd ./bin
+rm -rf *
+nasm -f aout ../src/libasm.asm -o libasm.o
+nasm -f aout ../src/kstart.asm -o kstart.o
+nasm -f aout ../src/loader.asm -o kstart.o
+
+gcc -c ../src/kernel.c -fno-stack-protector -o kernel.o -fno-builtin
+gcc -c ../src/libc.c -fno-stack-protector  -o libc.o -fno-builtin
+gcc -c ../src/keyboard.c -fno-stack-protector -o keyboard.o -fno-builtin
+gcc -c ../src/buffer.c -fno-stack-protector -o buffer.o -fno-builtin
+gcc -c ../src/iolib.c -fno-stack-protector -o iolib.o -fno-builtin
+gcc -c ../src/shell.c -fno-stack-protector -o shell.o -fno-builtin
+gcc -c ../src/string.c -fno-stack-protector -o string.o -fno-builtin
+gcc -c ../src/commands.c -fno-stack-protector -o commands.o -fno-builtin
+gcc -c ../src/prints.c -fno-stack-protector -o prints.o -fno-builtin
+
+ld -T ../src/link.ld -o kernel.bin kernel.o kstart.o libc.o libasm.o keyboard.o buffer.o iolib.o shell.o string.o commands.o prints.o

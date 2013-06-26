@@ -1,0 +1,70 @@
+#ifndef _IOLIB_
+#define _IOLIB_
+
+#define WRITE 4
+#define READ 3
+#define STDOUT 1
+#define STDIN 0
+#define KEYBOARD 2
+#define INT_MAX_VALUE 10
+
+/* Generates a number with an array of digits*/
+int toNumber(unsigned char* array, int arraySize);
+
+/* Identifies the operation and calls the respective service */
+void int_80(int operation, unsigned char *data, int fileDesc);
+
+void moveScreenCursor();
+
+/* Analizes which is the the data, and according to it, calls print*/
+void service_Write(unsigned char *data,int fileDesc);
+
+/* Calls _service_write in ASM which returns the scanCode in the 60h */
+void service_Read(unsigned char *data,int fileDesc);
+
+/* Print ascii in the position "where" of the screen*/
+void print(unsigned char *ascii, int where);
+
+/* Puts an ascii in the fileDesc, if fileDesc=STDIOUT puts it in the 
+ * screen*/
+void putc(int fileDesc, unsigned char ascii);
+
+/* Gets a character from the fileDesc, if fileDesc=STDIN, gets a
+ * character, from the keyboard's buffer*/
+unsigned char getc(int fileDesc);
+
+
+int printf(const char* fmt,...);
+
+int scanf(const char* fmt,...);
+
+
+/* Writes a string array of "length" in the fileDesc, if
+ * fileDesc=STDIOUT, writes it in the screen*/
+void write(unsigned char * string, int length, int fileDes);
+
+/* If fileDesc=KEYBOARD, reads from the keyboard, else if
+ * fileDesc=STDIN, reads from the keyboards buffer and if it's empty,
+ * keeps waiting until a key is added to the buffer*/
+unsigned char read(int fileDesc);
+
+/* Scrolls all the lines up one position leaving the last empty to
+ * continue writing*/
+int scrollOneUp();
+
+/* Prints a string*/
+void printString(char *s);
+
+/* Prints an integer*/
+void printInteger(int integer);
+
+/* Print an hexadecimal number*/
+void printHex(long hexa);
+
+/* Print an octal number*/
+void printOct(long oct);
+
+/*Prints an unsigned int number*/
+void printUnsignedInteger(unsigned int integer);
+
+#endif

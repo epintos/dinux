@@ -1,0 +1,11 @@
+#ifndef _STRING_
+#define _STRING_
+
+/*Compares s with t, if they are equals returns 1*/
+int strcmp(unsigned char *s,char *t);
+/* Returns the length of s*/
+int strLength(char *s);
+/*Copies strings from to to */
+char *strcpy(char *from, const char *to);
+
+#endif

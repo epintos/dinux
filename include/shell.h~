@@ -1,0 +1,17 @@
+#ifndef _SHELL_
+#define _SHELL_
+void pruebaScanf3();
+void pruebaScanf2();
+void pruebaScanf1();
+void printShellBuffer();
+void getcTest();
+void callShell();
+void cleanShellBuffer();
+int getCPUSpeed();
+unsigned int getRDTSC();
+
+/*Analyzes the content of the buffer in search for known commands.
+ * If a command is recognized, calls the function in charge of executing
+ * that command. If not, an error message is printed*/
+ void analyzeBuffer();
+#endif
